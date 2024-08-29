@@ -11,7 +11,7 @@ export const fetchTodos = createAsyncThunk('todos/fetchTodos', async (_, thunkAP
   try {
     const response = await axios.get(`${BASE_URL}/api/todos`);
     console.log("Response of fetchTodosL ", response)
-    return response.data.todos; // Ensure this matches your backend response
+    return response.data.todos; 
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response ? error.response.data.message : 'Failed to fetch todos');
   }
@@ -22,7 +22,7 @@ export const createTodo = createAsyncThunk('todos/createTodo', async (todoData, 
   try {
     const response = await axios.post(`${BASE_URL}/api/create-todo`, todoData);
     console.log("Response inside createTodo: ", response);
-    return response.data.createdTodo; // Ensure this matches your backend response
+    return response.data.createdTodo;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response ? error.response.data.message : 'Failed to create todo');
   }
