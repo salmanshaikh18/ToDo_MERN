@@ -2,7 +2,6 @@ import React from "react";
 import Todo from "./pages/Todo";
 import { Bounce, ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import StripePayment from "./components/StripePayment";
 import {BrowserRouter, Routes, Route} from "react-router-dom"
 import BuyPremiumPage from "./components/BuyPremiumPage";
 
