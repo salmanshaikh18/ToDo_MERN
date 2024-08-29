@@ -1,10 +1,28 @@
-import React, { useState } from "react";
-const CreateTodo = () => {
-    const [todoName, setTodoName] = useState("")
-    const [todoDescription, setTodoDescription] = useState("")
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { createTodo } from '../redux/slices/todoSlice';
+import { toast } from 'react-toastify';
 
-    const handleAddTodo = (e) => {
+const CreateTodo = () => {
+  const [todoName, setTodoName] = useState('');
+  const [todoDescription, setTodoDescription] = useState('');
+  const dispatch = useDispatch();
+
+  const handleAddTodo = async (e) => {
+    e.preventDefault();
+    if (todoName && todoDescription) {
+      try {
+        await dispatch(createTodo({ todoName, todoDescription })).unwrap();
+        toast.success('Todo created successfully!');
+        setTodoName('');
+        setTodoDescription('');
+      } catch (error) {
+        toast.error(error.message || 'Failed to create todo.');
+      }
+    } else {
+      toast.error('Please fill in both fields.');
     }
+  };
 
   return (
     <div className="h-[260px] sm:h-[200px] md:h-[200px] lg:h-40 bg-slate-800 w-[94%] sm:w-[90%] md:w-[80%] lg:w-[90%] xl:w-[70%] rounded-xl flex flex-col sm:flex-row justify-center items-center gap-6 sm:gap-10 px-10">
@@ -30,7 +48,9 @@ const CreateTodo = () => {
       </div>
       <div className="sm:w-[20%]">
         <div className="flex justify-center items-center">
-          <button onClick={handleAddTodo} className="bg-orange-700 cursor-pointer transition-all ease-in-out duration-300 hover:bg-orange-800 px-4 py-2 rounded-xl">Add Todo</button>
+          <button onClick={handleAddTodo} className="bg-orange-700 cursor-pointer transition-all ease-in-out duration-300 hover:bg-orange-800 px-4 py-2 rounded-xl">
+            Add Todo
+          </button>
         </div>
       </div>
     </div>

@@ -1,10 +1,12 @@
 import React from "react";
 import CreateTodo from "../components/CreateTodo";
 import Todos from "../components/Todos";
+import { useNavigate } from "react-router-dom";
 
 const Todo = () => {
+  const navigate = useNavigate()
   const handleBuyPremium = () => {
-
+    navigate("/buy-premium")
   }
   return (
     <div className="flex items-center flex-col h-full w-full">
