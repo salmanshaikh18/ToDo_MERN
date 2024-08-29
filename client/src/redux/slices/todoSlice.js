@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
-// Set up base URL for axios to avoid repeating it
 const BASE_URL = import.meta.env.VITE_BACKEND_URI;
 
 // Async Thunks for CRUD operations
@@ -52,7 +51,7 @@ export const deleteTodo = createAsyncThunk('todos/deleteTodo', async (todoId, th
 export const completeTodo = createAsyncThunk('todos/completeTodo', async (todoId, thunkAPI) => {
   try {
     const response = await axios.get(`${BASE_URL}/api/complete-todo/${todoId}`);
-    return response.data.completedTodo; // Ensure this matches your backend response
+    return response.data.completedTodo;
   } catch (error) {
     return thunkAPI.rejectWithValue(error.response ? error.response.data.message : 'Failed to complete todo');
   }
